@@ -1,3 +1,5 @@
+/** @type {AppTypes.Config} */
+
 window.config = {
   routerBasename: '/',
   // whiteLabeling: {},
@@ -15,22 +17,10 @@ window.config = {
   maxNumRequests: {
     interaction: 100,
     thumbnail: 75,
-    // Prefetch number is dependent on the http protocol. For http 2 or
-    // above, the number of requests can be go a lot higher.
     prefetch: 25,
   },
-  // filterQueryParam: false,
   defaultDataSourceName: 'dicomweb',
-  /* Dynamic config allows user to pass "configUrl" query string this allows to load config without recompiling application. The regex will ensure valid configuration source */
-  // dangerouslyUseDynamicConfig: {
-  //   enabled: true,
-  //   // regex will ensure valid configuration source and default is /.*/ which matches any character. To use this, setup your own regex to choose a specific source of configuration only.
-  //   // Example 1, to allow numbers and letters in an absolute or sub-path only.
-  //   // regex: /(0-9A-Za-z.]+)(\/[0-9A-Za-z.]+)*/
-  //   // Example 2, to restricts to either hosptial.com or othersite.com.
-  //   // regex: /(https:\/\/hospital.com(\/[0-9A-Za-z.]+)*)|(https:\/\/othersite.com(\/[0-9A-Za-z.]+)*)/
-  //   regex: /.*/,
-  // },
+
   dataSources: [
     {
       namespace: '@ohif/extension-default.dataSourcesModule.dicomweb',
@@ -176,21 +166,6 @@ window.config = {
       commandName: 'windowLevelPreset9',
       label: 'W/L Preset 9',
       keys: ['9'],
-    },
-  ],
-  oidc: [
-    {
-      // ~ REQUIRED
-      // Authorization Server URL
-      authority: 'https://login.microsoftonline.com/6319d56c-62bc-4818-9185-450c120901d9/v2.0/',
-      client_id: '319ee0a9-3eb8-468d-a10d-b99fa384a7b0',
-      redirect_uri: '/callback', // `OHIFStandaloneViewer.js`
-      response_type: 'token', // "implicit"
-      scope: 'openid https://dicom.healthcareapis.azure.com/Dicom.ReadWrite',
-      // ~ OPTIONAL
-      post_logout_redirect_uri: '/logout-redirect.html',
-      automaticSilentRenew: true,
-      revokeAccessTokenOnSignout: true
     },
   ],
 };
