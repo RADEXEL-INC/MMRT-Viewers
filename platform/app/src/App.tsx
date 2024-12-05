@@ -140,6 +140,17 @@ function App({
   // Should there be a generic call to init on the extension manager?
   customizationService.init(extensionManager);
 
+  const getAuthorizationHeader = () => {
+    const dicom_auth_token = sessionStorage.getItem('dicom_auth_token');
+    if (!dicom_auth_token) {
+      return null;
+    }
+    return {
+      Authorization: `Bearer ${dicom_auth_token}`,
+    };
+  };
+  userAuthenticationService.setServiceImplementation({ getAuthorizationHeader });
+
   // Use config to create routes
   const appRoutes = createRoutes({
     modes,

@@ -24,6 +24,7 @@ import {
 } from '@ohif/core';
 
 import loadModules, { loadModule as peerImport } from './pluginImports';
+import { getDicomToken } from './dicom_auth';
 
 /**
  * @param {object|func} appConfigOrFunc - application configuration, or a function that returns application configuration
@@ -88,6 +89,7 @@ async function appInit(appConfigOrFunc, defaultExtensions, defaultModes) {
   const loadedExtensions = await loadModules([...defaultExtensions, ...appConfig.extensions]);
   await extensionManager.registerExtensions(loadedExtensions, appConfig.dataSources);
 
+  await getDicomToken();
   // TODO: We no longer use `utils.addServer`
   // TODO: We no longer init webWorkers at app level
   // TODO: We no longer init the user Manager
